@@ -6,7 +6,13 @@ Console.WriteLine("Seminar4. Home task №4");
 Console.WriteLine("----Task 29---");
 int LimUp = ReadUserRequstSingleString("Set the upper limit number, LimUp - ");
 int LimLow = ReadUserRequstSingleString("Set the lower limit number, LimLow - ");
-int arrLen = UserDitgitCheck(LimLow, LimUp, "введите длину массива: ");
+int LimArrUp = ReadUserRequstSingleString("установите верхний предел длинны массива, LimArrUp - ");
+int LimArrLow = 0;
+Console.WriteLine("нижний предел длинны массива, LimArrLow = 0");
+//результат заполнения массива
+int arrLen = UserDitgitCheck(LimArrLow, LimArrUp, "введите длину массива: ");
+int[] arr = Gen1DArr(arrLen, LimLow, LimUp);
+Print1DArray(arr);
 
 ///методы
 //-м- метода ввода единичного входного аргумента типа "строка". Парсинг в Biginteger
@@ -36,35 +42,26 @@ int UserDitgitCheck(int limitLow, int limitUp, string text)
     return variable;
 }
 
-//Метод читает запрос пользователя в виде единичной строки
-int ReadData(string msg)
-{
-    Console.WriteLine(msg);
-    return int.Parse(Console.ReadLine() ?? "0");
-}
-
-int[] Gen1DArr(int num, int LimUp, int LimLow)
+//-М- Метод генерации массива в заданных пределах
+int[] Gen1DArr(int num, int LimLowArr, int LimUpArr)
 {
     Random rnd = new Random();
     int[] arr = new int[num];
     for (int i = 0; i < arr.Length; i++)
     {
-        arr[i] = rnd.Next(LimLow, LimUp);
+        arr[i] = rnd.Next(LimLowArr, LimUpArr);
     }
     return arr;
 }
 
+//-М- Метод вывода массива
 void Print1DArray(int[] arr)
 {
     Console.Write("[");
     for (int i = 0; i < arr.Length - 1; i++)
     {
         Console.Write(arr[i] + ", ");
-        
+
     }
     Console.Write(arr[arr.Length - 1] + "]");
 }
-
-//int arrLen = ReadData("введите длину массива");
-int[] arr = Gen1DArr(arrLen, LimUp, LimLow);
-Print1DArray(arr);
